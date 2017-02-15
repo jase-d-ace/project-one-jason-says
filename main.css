@@ -1,0 +1,9 @@
+#main {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.gamepiece {
+    height: 50vh;
+    width: 50vw;
+}
