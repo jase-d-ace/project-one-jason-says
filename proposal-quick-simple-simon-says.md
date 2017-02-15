@@ -13,7 +13,10 @@
 * Styling might be tricky if the boxes don’t line up correctly
 
 ## Wireframe:
-Incoming
+[Landing Page Link](https://wireframe.cc/2t5FwK)
+[Game Page Link](https://wireframe.cc/IQULDJ)
+
+
 
 ## Technologies Used:
 * HTML
