@@ -30,7 +30,6 @@ $(document).ready(function () {
     //    setTimeout(function () {
     //        alert("Time's Up!")
     //    }, 10000); //actually pops up an alert that says time's up
-    //JQUERY SELECTORS GIVE YOU AN ARRAY!!!!!
     //###########################################
     //end timer
     //###########################################
@@ -42,16 +41,16 @@ $(document).ready(function () {
     //###########################################
     //make flash
     //###########################################
+    //Thanks, Gersh.
+    //BUUUUUUUUUUUUUUGGGGGGGGGGGGGGGSSSSSSSSSSSSSSS
     var makeFlash = function () {
         var singularSquare = $square[Math.floor(Math.random() * 4)];
         var flash = setInterval(function () {
             $(singularSquare).fadeOut(200).fadeIn(200);
         }, 400);
-        $(singularSquare).click(function () {
-            console.log('clicked')
+        $(singularSquare).one('click', function () {
             clearInterval(flash);
             makeFlash();
-            $(this).unbind('click');
         });
     }
     makeFlash();
@@ -70,6 +69,4 @@ $(document).ready(function () {
     //###########################################
     //end generate colors
     //###########################################
-    //Thanks, Gersh.
-    //BUUUUUUUUUUUUUUGGGGGGGGGGGGGGGSSSSSSSSSSSSSSS
 }); //end of jQuery stuff. Don't touch this bracket or else!!!!
