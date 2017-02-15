@@ -25,7 +25,7 @@ $(document).ready(function () {
         if (timePassed === 10) {
             clearInterval(time);
         } //if statement that stops the counter at 0
-    }, 1000); //end of set interval
+    }, 1000); //end of setInterval
     //This timer function definitely works! commented out for now to stop the timer from distracting me.
     //    setTimeout(function () {
     //        alert("Time's Up!")
@@ -35,7 +35,7 @@ $(document).ready(function () {
     //end timer
     //###########################################
     /*time for pseudocode
-    square flashes.
+    square flashes.check
     if square===clicked
     flash next square.
     */
@@ -51,15 +51,19 @@ $(document).ready(function () {
     //###########################################
     //end generate colors
     //###########################################
-    var singularSquare = $square[Math.floor(Math.random() * 4)]
-    var flash = setInterval(function () {
-        $(singularSquare).fadeOut(200).fadeIn(200)
-    }, 100);
-    //    $square.each(function (i, anything) {
-    //        $(anything).fadeTo(100, 0.3, function () {
-    //            $(this).fadeTo(500, 1.0);
-    //        });
-    //    });
+    //Thanks, Gersh.
+    var makeFlash = function () {
+        var singularSquare = $square[Math.floor(Math.random() * 4)];
+        var flash = setInterval(function () {
+            $(singularSquare).fadeOut(200).fadeIn(200);
+        }, 400);
+        $(singularSquare).click(function () {
+            console.log('clicked')
+            clearInterval(flash);
+            makeFlash();
+        })
+    }
+    makeFlash();
     //test function to make sure i know how to code an event listener
     //        $square.click(function () {
     //        alert('clicked! Good job, you coded this right');
