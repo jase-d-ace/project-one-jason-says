@@ -36,22 +36,14 @@ $(document).ready(function () {
     //###########################################
     /*time for pseudocode
     square flashes.check
-    if square===clicked
-    flash next square.
+    if square===clickedcheck
+    flash next square.check-ish
     */
     //###########################################
-    //generate colors
-    //###########################################
-    $square.each(function (i, anything) {
-        var red = Math.floor(Math.random() * 255);
-        var green = Math.floor(Math.random() * 255);
-        var blue = Math.floor(Math.random() * 255);
-        $(anything).css('background-color', 'rgb(' + red + ',' + green + ',' + blue + ')');
-    });
-    //###########################################
-    //end generate colors
+    //make flash
     //###########################################
     //Thanks, Gersh.
+    //BUUUUUUUUUUUUUUGGGGGGGGGGGGGGGSSSSSSSSSSSSSSS
     var makeFlash = function () {
         var singularSquare = $square[Math.floor(Math.random() * 4)];
         var flash = setInterval(function () {
@@ -64,8 +56,19 @@ $(document).ready(function () {
         })
     }
     makeFlash();
-    //test function to make sure i know how to code an event listener
-    //        $square.click(function () {
-    //        alert('clicked! Good job, you coded this right');
-    //    })
+    //###########################################
+    //end make flash
+    //###########################################
+    //###########################################
+    //generate colors
+    //###########################################
+    $square.each(function (i, anything) {
+        var red = Math.floor(Math.random() * 255);
+        var green = Math.floor(Math.random() * 255);
+        var blue = Math.floor(Math.random() * 255);
+        $(anything).css('background-color', 'rgb(' + red + ',' + green + ',' + blue + ')');
+    });
+    //###########################################
+    //end generate colors
+    //###########################################
 }); //end of jQuery stuff. Don't touch this bracket or else!!!!
