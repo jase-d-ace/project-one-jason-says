@@ -31,6 +31,9 @@ $(document).ready(function () {
     //###########################################
     //end timer
     //###########################################
+    /*time for pseudocode
+    if square===clicked
+    */
     //###########################################
     //generate colors
     //###########################################
@@ -45,7 +48,7 @@ $(document).ready(function () {
     //end generate colors
     //###########################################
     //test function to make sure i know how to code an event listener
-    $square.click(function () {
-        alert('clicked! Good job, you coded this right');
-    })
+    //    $square.click(function () {
+    //        alert('clicked! Good job, you coded this right');
+    //    })
 }); //end of jQuery stuff. Don't touch this bracket or else!!!!
