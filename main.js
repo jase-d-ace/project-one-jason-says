@@ -32,7 +32,9 @@ $(document).ready(function () {
     //end timer
     //###########################################
     /*time for pseudocode
+    square flashes.
     if square===clicked
+    flash next square.
     */
     //###########################################
     //generate colors
@@ -47,6 +49,11 @@ $(document).ready(function () {
     //###########################################
     //end generate colors
     //###########################################
+    $square.each(function (i, anything) {
+        $(anything).fadeTo(100, 0.3, function () {
+            $(this).fadeTo(500, 1.0);
+        });
+    });
     //test function to make sure i know how to code an event listener
     //    $square.click(function () {
     //        alert('clicked! Good job, you coded this right');
