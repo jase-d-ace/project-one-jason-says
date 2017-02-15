@@ -42,8 +42,6 @@ $(document).ready(function () {
     //###########################################
     //make flash
     //###########################################
-    //Thanks, Gersh.
-    //BUUUUUUUUUUUUUUGGGGGGGGGGGGGGGSSSSSSSSSSSSSSS
     var makeFlash = function () {
         var singularSquare = $square[Math.floor(Math.random() * 4)];
         var flash = setInterval(function () {
@@ -53,7 +51,8 @@ $(document).ready(function () {
             console.log('clicked')
             clearInterval(flash);
             makeFlash();
-        })
+            $(this).unbind('click');
+        });
     }
     makeFlash();
     //###########################################
@@ -71,4 +70,6 @@ $(document).ready(function () {
     //###########################################
     //end generate colors
     //###########################################
+    //Thanks, Gersh.
+    //BUUUUUUUUUUUUUUGGGGGGGGGGGGGGGSSSSSSSSSSSSSSS
 }); //end of jQuery stuff. Don't touch this bracket or else!!!!
