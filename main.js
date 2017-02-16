@@ -1,12 +1,11 @@
 //alert('Woo, javascript is connected!')
+//Next steps: craft logic that makes things flash in sequence
 $(document).ready(function () {
     //###########################################
     //variables
     //###########################################
     var $div = $('#main');
     var $square = $('.gamepiece');
-    console.log($square);
-    console.log($square.length);
     var $timer = $('.timer');
     var timeRemaining = 10;
     var timePassed = 0;
@@ -20,40 +19,55 @@ $(document).ready(function () {
     //appending a timer generates a countdown, which is what i want!
     var time = setInterval(function () {
         timeRemaining--;
-        $timer.text(timeRemaining);
+        $timer.text("Time: " + timeRemaining);
         timePassed++;
         if (timePassed === 10) {
             clearInterval(time);
         } //if statement that stops the counter at 0
     }, 1000); //end of setInterval
-    //This timer function definitely works! commented out for now to stop the timer from distracting me.
+    //This timer function definitely works!
     //    setTimeout(function () {
     //        alert("Time's Up!")
     //    }, 10000); //actually pops up an alert that says time's up
     //###########################################
     //end timer
     //###########################################
-    /*time for pseudocode
-    square flashes.check
-    if square===clickedcheck
-    flash next square.check-ish
-    */
     //###########################################
     //make flash
     //###########################################
     //Thanks, Gersh.
-    //BUUUUUUUUUUUUUUGGGGGGGGGGGGGGGSSSSSSSSSSSSSSS
-    var makeFlash = function () {
+    var round = [];
+    var counter = 0;
+    //generates the sequence that serves as the "game board"
+    for (var i = 0; i < 50; i++) {
         var singularSquare = $square[Math.floor(Math.random() * 4)];
-        var flash = setInterval(function () {
-            $(singularSquare).fadeOut(200).fadeIn(200);
-        }, 400);
-        $(singularSquare).one('click', function () {
-            clearInterval(flash);
-            makeFlash();
-        });
-    }
-    makeFlash();
+        round.push(singularSquare);
+        $(singularSquare).fadeOut(200).fadeIn(200);
+    };
+    $($square).click(function () {
+        counter++;
+        console.log(counter);
+    })
+    console.log(round);
+    console.log($square);
+    //    var makeFlash = function () {
+    //            var singularSquare = $square[Math.floor(Math.random() * 4)];
+    //            $(singularSquare).fadeOut(200).fadeIn(200);
+    //            round.push(singularSquare);
+    //            console.log(round.length);
+    //            //thanks to the random person who suggested .one() at
+    //            //stackoverflow.com/questions/14969960/jquery-click-events-firing-multiple-times
+    //            $(singularSquare).one('click', function () {
+    //                makeFlash();
+    //                console.log(round);
+    //            });
+    //            //stops you from clicking after the timer runs out
+    //            setTimeout(function () {
+    //                $square.off('click')
+    //            }, 10000)
+    //        }
+    //        //delays the start of the game
+    //    setTimeout(makeFlash, 3000);
     //###########################################
     //end make flash
     //###########################################
