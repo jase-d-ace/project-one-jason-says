@@ -37,69 +37,59 @@ $(document).ready(function () {
     //###########################################
     //Thanks, Gersh and Taka.
     var round = [];
-    var index = 0;
     var generatePath = function () {
         var singularSquare = $square[Math.floor(Math.random() * 4)];
         round.push(singularSquare.id);
-        index++;
+        console.log(round);
     };
-    var setPattern = function () {
-        for (var i = 0; i < round.length; i++) {
-            setTimeout(function () {
-                $(round[i]).fadeOut(200).fadeIn(200)
-            }, i * 1000)
-        }
-    }
     generatePath();
-    setPattern();
     var counter = 0;
     var playerClicks = [];
     console.log(playerClicks);
     console.log(round);
     $('.gamepiece').click(function () {
-        counter++;
+        console.log(counter);
         if (this.id === round[counter]) {
             playerClicks.push(this.id);
+            counter++;
         }
-        //        console.log(playerClicks);
-        //        console.log(round);
+        else {
+            var lose = confirm('You Lose!! Play again?');
+            if (lose) {
+                location.reload();
+            };
+        };
+        console.log(playerClicks);
+        console.log(round);
         if (counter === round.length) {
-            console.log(round);
+            console.log('you got to the end!')
             counter = 0;
             generatePath();
-            setPattern();
-            //            checkUserClick();
         }
     });
-    //    else {
-    //        var lose = confirm('You Lose!! Play again?');
-    //        if (lose) {
-    //            location.reload();
+    //    var checkUserClick = function () {
+    //            for (var i = 0; i < round.length; i++) {
+    //                if (playerClicks[i] === round[i]) {}
+    //            }
+    //        }
+    //    var setPattern = function () {
+    //        for (var i = 0; i < round.length; i++) {
+    //            setInterval(function () {
+    //                $(round[i]).fadeOut(200).fadeIn(200)
+    //            }, (i * 1000));
     //        };
     //    };
-    var checkUserClick = function () {
-            for (var i = 0; i < round.length; i++) {
-                if (playerClicks[i] === round[i]) {}
-            }
-        }
-        //    var setPattern = function () {
-        //        for (var i = 0; i < round.length; i++) {
-        //            setInterval(function () {
-        //                $(round[i]).fadeOut(200).fadeIn(200)
-        //            }, (i * 1000));
-        //        };
-        //    };
-        //    if (playerClicks.length === round.length) {}
-        /*counter needs to be less than round.length
-        and go up only when you finish a round
-        and when index = counter, that means that you've finished a round
-        */
-        //    setTimeout(function () {
-        //        $square.off('click');
-        //    }, 10000);
-        //###########################################
-        //generate colors
-        //###########################################
+    //    if (playerClicks.length === round.length) {}
+    /*counter needs to be less than round.length
+    and go up only when you finish a round
+    and when index = counter, that means that you've finished a round
+    */
+    //    setTimeout(function () {
+    //        $square.off('click');
+    //    }, 10000);
+    //###########################################
+    //generate colors
+    //###########################################
     $square.each(function (i, anything) {
         var red = Math.floor(Math.random() * 255);
         var green = Math.floor(Math.random() * 255);
