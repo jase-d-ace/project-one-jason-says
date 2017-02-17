@@ -33,61 +33,6 @@ $(document).ready(function () {
     //end timer
     //###########################################
     //###########################################
-    //make flash
-    //###########################################
-    //Thanks, Gersh and Taka.
-    var round = [];
-    var generatePath = function () {
-        var singularSquare = $square[Math.floor(Math.random() * 4)];
-        round.push(singularSquare.id);
-        console.log(round);
-    };
-    generatePath();
-    var counter = 0;
-    var playerClicks = [];
-    console.log(playerClicks);
-    console.log(round);
-    $('.gamepiece').click(function () {
-        console.log(counter);
-        if (this.id === round[counter]) {
-            playerClicks.push(this.id);
-            counter++;
-        }
-        else {
-            var lose = confirm('You Lose!! Play again?');
-            if (lose) {
-                location.reload();
-            };
-        };
-        console.log(playerClicks);
-        console.log(round);
-        if (counter === round.length) {
-            console.log('you got to the end!')
-            counter = 0;
-            generatePath();
-        }
-    });
-    //    var checkUserClick = function () {
-    //            for (var i = 0; i < round.length; i++) {
-    //                if (playerClicks[i] === round[i]) {}
-    //            }
-    //        }
-    //    var setPattern = function () {
-    //        for (var i = 0; i < round.length; i++) {
-    //            setInterval(function () {
-    //                $(round[i]).fadeOut(200).fadeIn(200)
-    //            }, (i * 1000));
-    //        };
-    //    };
-    //    if (playerClicks.length === round.length) {}
-    /*counter needs to be less than round.length
-    and go up only when you finish a round
-    and when index = counter, that means that you've finished a round
-    */
-    //    setTimeout(function () {
-    //        $square.off('click');
-    //    }, 10000);
-    //###########################################
     //generate colors
     //###########################################
     $square.each(function (i, anything) {
@@ -99,33 +44,56 @@ $(document).ready(function () {
     //###########################################
     //end generate colors
     //###########################################
-    //    var setPattern = function () {
-    //        for (var i = 0; i < round.length; i++) {
-    //            setTimeout(function () {
-    //                $(round[i]).fadeOut(200).fadeIn(200)
-    //            }, (i * 1000));
-    //        };
-    //    };
-    //    setPattern();
-    //    var makeFlash = function () {
-    //            var singularSquare = $square[Math.floor(Math.random() * 4)];
-    //            $(singularSquare).fadeOut(200).fadeIn(200);
-    //            round.push(singularSquare);
-    //            console.log(round.length);
-    //            //thanks to the random person who suggested .one() at
-    //            //stackoverflow.com/questions/14969960/jquery-click-events-firing-multiple-times
-    //            $(singularSquare).one('click', function () {
-    //                makeFlash();
-    //                console.log(round);
-    //            });
-    //            //stops you from clicking after the timer runs out
-    //            setTimeout(function () {
-    //                $square.off('click')
-    //            }, 10000)
-    //        }
-    //        //delays the start of the game
-    //    setTimeout(makeFlash, 3000);
+    //###########################################
+    //make flash
+    //###########################################
     //###########################################
     //end make flash
     //###########################################
+    //Thanks, Gersh and Taka.
+    //CPU's array to generate the pattern
+    var round = [];
+    //CPU will generate a random square at the end of your turn
+    var generatePath = function () {
+        //pick a random square
+        var singularSquare = $square[Math.floor(Math.random() * 4)];
+        //push it into the array
+        round.push(singularSquare.id);
+        console.log(round);
+    }; //end of generatePath();
+    //call it to start the game
+    generatePath();
+    //counter to keep track of the player's moves
+    var counter = 0;
+    //array that will try to match the CPU's
+    var playerClicks = [];
+    console.log(playerClicks);
+    console.log(round);
+    //click function that moves the game forward
+    $('.gamepiece').click(function () {
+        console.log(counter);
+        //this checks the ID of the thing you clicked...
+        if (this.id === round[counter]) {
+            //...and if it matches, it gives you the chance to keep going.
+            playerClicks.push(this.id);
+            counter++;
+        } //end of checking if you're right
+        //...if not, you lose.
+        else {
+            var lose = confirm('You Lose!! Play again?');
+            if (lose) {
+                location.reload();
+            };
+        }; //end of game over check
+        console.log(playerClicks);
+        console.log(round);
+        //if you get the right amount of clicks, and they all match...
+        if (counter === round.length) {
+            console.log('you got to the end!')
+                //reset the counter to 0
+            counter = 0;
+            //and give the turn back to the CPU
+            generatePath();
+        } //end of if-statement
+    });
 }); //end of jQuery stuff. Don't touch this bracket or else!!!!
