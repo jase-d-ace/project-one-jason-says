@@ -35,21 +35,37 @@ $(document).ready(function () {
     //###########################################
     //make flash
     //###########################################
-    //Thanks, Gersh.
+    //Thanks, Gersh and Taka.
     var round = [];
-    var counter = 0;
-    //generates the sequence that serves as the "game board"
-    for (var i = 0; i < 50; i++) {
+    var generatePath = function () {
         var singularSquare = $square[Math.floor(Math.random() * 4)];
-        round.push(singularSquare);
-        $(singularSquare).fadeOut(200).fadeIn(200);
+        round.push(singularSquare.id);
+        console.log(round)
     };
-    $($square).click(function () {
-        counter++;
-        console.log(counter);
-    })
-    console.log(round);
-    console.log($square);
+    generatePath();
+    var playerClicks = [];
+    var index = 0;
+    $('.gamepiece').click(function () {
+        playerClicks.push(this.id);
+        //        console.log(playerClicks);
+        console.log(index)
+        if (this.id === round[index]) {
+            generatePath();
+            console.log(round);
+            index++;
+        }
+        else {
+            alert('You Lose!!');
+        }
+    });
+    var setPattern = function () {
+        for (var i = 0; i < round.length; i++) {
+            setTimeout(function () {
+                $(round[i]).fadeOut(200).fadeIn(200)
+            }, (i * 1000));
+        };
+    };
+    setPattern();
     //    var makeFlash = function () {
     //            var singularSquare = $square[Math.floor(Math.random() * 4)];
     //            $(singularSquare).fadeOut(200).fadeIn(200);
