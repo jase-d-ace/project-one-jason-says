@@ -40,32 +40,34 @@ $(document).ready(function () {
     var generatePath = function () {
         var singularSquare = $square[Math.floor(Math.random() * 4)];
         round.push(singularSquare.id);
-        console.log(round)
+        console.log(round);
     };
     generatePath();
     var playerClicks = [];
     var index = 0;
+    var counter = 0;
     $('.gamepiece').click(function () {
         playerClicks.push(this.id);
-        //        console.log(playerClicks);
-        console.log(index)
-        if (this.id === round[index]) {
+        console.log(round);
+        if (playerClicks[index] === round[index]) {
             generatePath();
-            console.log(round);
             index++;
         }
         else {
-            alert('You Lose!!');
-        }
-    });
-    var setPattern = function () {
-        for (var i = 0; i < round.length; i++) {
-            setTimeout(function () {
-                $(round[i]).fadeOut(200).fadeIn(200)
-            }, (i * 1000));
+            var lose = confirm('You Lose!! Play again?');
+            if (lose) {
+                location.reload();
+            };
         };
-    };
-    setPattern();
+    });
+    //    var setPattern = function () {
+    //        for (var i = 0; i < round.length; i++) {
+    //            setTimeout(function () {
+    //                $(round[i]).fadeOut(200).fadeIn(200)
+    //            }, (i * 1000));
+    //        };
+    //    };
+    //    setPattern();
     //    var makeFlash = function () {
     //            var singularSquare = $square[Math.floor(Math.random() * 4)];
     //            $(singularSquare).fadeOut(200).fadeIn(200);
