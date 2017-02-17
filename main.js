@@ -43,15 +43,18 @@ $(document).ready(function () {
         console.log(round);
     };
     generatePath();
-    var playerClicks = [];
     var index = 0;
     var counter = 0;
+    var playerClicks = [];
+    console.log(counter);
+    playerClicks.length = counter;
     $('.gamepiece').click(function () {
         playerClicks.push(this.id);
-        console.log(round);
-        if (playerClicks[index] === round[index]) {
-            generatePath();
+        console.log(playerClicks);
+        //        console.log(round);
+        if (playerClicks[counter] === round[counter]) {
             index++;
+            counter++;
         }
         else {
             var lose = confirm('You Lose!! Play again?');
@@ -59,7 +62,30 @@ $(document).ready(function () {
                 location.reload();
             };
         };
+        if (playerClicks.length === round.length) {
+            generatePath();
+            console.log(index);
+        }
     });
+    /*counter needs to be less than round.length
+    and go up only when you finish a round
+    and when index = counter, that means that you've finished a round
+    */
+    //    setTimeout(function () {
+    //        $square.off('click');
+    //    }, 10000);
+    //###########################################
+    //generate colors
+    //###########################################
+    $square.each(function (i, anything) {
+        var red = Math.floor(Math.random() * 255);
+        var green = Math.floor(Math.random() * 255);
+        var blue = Math.floor(Math.random() * 255);
+        $(anything).css('background-color', 'rgb(' + red + ',' + green + ',' + blue + ')');
+    });
+    //###########################################
+    //end generate colors
+    //###########################################
     //    var setPattern = function () {
     //        for (var i = 0; i < round.length; i++) {
     //            setTimeout(function () {
@@ -88,17 +114,5 @@ $(document).ready(function () {
     //    setTimeout(makeFlash, 3000);
     //###########################################
     //end make flash
-    //###########################################
-    //###########################################
-    //generate colors
-    //###########################################
-    $square.each(function (i, anything) {
-        var red = Math.floor(Math.random() * 255);
-        var green = Math.floor(Math.random() * 255);
-        var blue = Math.floor(Math.random() * 255);
-        $(anything).css('background-color', 'rgb(' + red + ',' + green + ',' + blue + ')');
-    });
-    //###########################################
-    //end generate colors
     //###########################################
 }); //end of jQuery stuff. Don't touch this bracket or else!!!!

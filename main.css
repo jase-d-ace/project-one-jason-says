@@ -5,7 +5,8 @@ p {
 
 #main {
     margin: 0 auto;
-    width: 50vh;
+    width: 25vw;
+    height: 50vh;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
