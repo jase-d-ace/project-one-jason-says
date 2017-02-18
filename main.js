@@ -20,7 +20,7 @@ $(document).ready(function () {
     //appending a timer generates a countdown, which is what i want!
     var time = setInterval(function () {
         timeRemaining--;
-        $timer.text("Time: " + timeRemaining);
+        $timer.text($('#your-name').value + "'s Time: " + timeRemaining);
         timePassed++;
         if (timePassed === 10) {
             clearInterval(time);
@@ -60,14 +60,25 @@ $(document).ready(function () {
     }; //end of generatePath();
     //call it to start the game
     generatePath();
+    //###########################################
+    //make flash
+    //###########################################
     var setPattern = function () {
+        //iterates over the CPU's array...
         $(round).each(function (i, square) {
+            //...and sets up a timeout method...
             setTimeout(function () {
+                //...for every square in the current sequence...
                 $('#' + [square]).fadeOut(200).fadeIn(200);
-            }, (i * 500))
-        })
-    }
+                //...to flash one by one and guide you
+            }, (i * 500)); //end of setTimeout
+        }); //end of .each() method
+    }; //end of setPattern();
+    //again, call it to start the game.
     setPattern();
+    //###########################################
+    //end make flash
+    //###########################################
     //counter to keep track of the player's moves
     var counter = 0;
     //array that will try to match the CPU's
@@ -107,12 +118,6 @@ $(document).ready(function () {
     }); //end of click listener
     //###########################################
     //end game logic
-    //###########################################
-    //###########################################
-    //make flash
-    //###########################################
-    //###########################################
-    //end make flash
     //###########################################
     //###########################################
     //reload button
