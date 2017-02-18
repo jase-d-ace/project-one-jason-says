@@ -57,14 +57,17 @@ $(document).ready(function () {
         //...and push it into the array.
         round.push(singularSquare.id);
         console.log(round);
-        for (var i = 0; i < round.length; i++) {
-            setTimeout(function () {
-                $('#' + round[i]).fadeOut(200).fadeIn(200);
-            }, i * 1000);
-        };
     }; //end of generatePath();
     //call it to start the game
     generatePath();
+    var setPattern = function () {
+        $(round).each(function (i, square) {
+            setTimeout(function () {
+                $('#' + [square]).fadeOut(200).fadeIn(200);
+            }, (i * 500))
+        })
+    }
+    setPattern();
     //counter to keep track of the player's moves
     var counter = 0;
     //array that will try to match the CPU's
@@ -96,6 +99,7 @@ $(document).ready(function () {
             counter = 0;
             //...and give the turn back to the CPU!
             generatePath();
+            setPattern();
             //what's a game without a scoreboard??
             score++;
             $('.score').text('Score: ' + score)
