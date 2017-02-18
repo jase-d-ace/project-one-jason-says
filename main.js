@@ -1,5 +1,5 @@
 //alert('Woo, javascript is connected!')
-//Next steps: craft logic that makes things flash in sequence
+//Thanks, Gersh and Taka.
 $(document).ready(function () {
     //###########################################
     //variables
@@ -7,9 +7,10 @@ $(document).ready(function () {
     var $div = $('#main');
     var $square = $('.gamepiece');
     var $timer = $('.timer');
-    var timeRemaining = 10;
+    var timeRemaining = 21;
     var timePassed = 0;
     var $button = $('button');
+    var score = 0;
     //###########################################
     //end variables
     //###########################################
@@ -28,7 +29,7 @@ $(document).ready(function () {
     //This timer function definitely works!
     //    setTimeout(function () {
     //        alert("Time's Up!")
-    //    }, 10000); //actually pops up an alert that says time's up
+    //    }, 20000); //actually pops up an alert that says time's up
     //###########################################
     //end timer
     //###########################################
@@ -45,21 +46,22 @@ $(document).ready(function () {
     //end generate colors
     //###########################################
     //###########################################
-    //make flash
+    //game logic
     //###########################################
-    //###########################################
-    //end make flash
-    //###########################################
-    //Thanks, Gersh and Taka.
     //CPU's array to generate the pattern
     var round = [];
     //CPU will generate a random square at the end of your turn
     var generatePath = function () {
-        //pick a random square
+        //pick a random square...
         var singularSquare = $square[Math.floor(Math.random() * 4)];
-        //push it into the array
+        //...and push it into the array.
         round.push(singularSquare.id);
         console.log(round);
+        for (var i = 0; i < round.length; i++) {
+            setTimeout(function () {
+                $('#' + round[i]).fadeOut(200).fadeIn(200);
+            }, i * 1000);
+        };
     }; //end of generatePath();
     //call it to start the game
     generatePath();
@@ -72,14 +74,14 @@ $(document).ready(function () {
     //click function that moves the game forward
     $('.gamepiece').click(function () {
         console.log(counter);
-        //this checks the ID of the thing you clicked...
+        //this checks if the ID of the thing you clicked matches...
         if (this.id === round[counter]) {
-            //...and if it matches, it gives you the chance to keep going.
+            //...if it does, it gives you the chance to keep going.
             playerClicks.push(this.id);
             counter++;
         } //end of checking if you're right
-        //...if not, you lose.
         else {
+            //...if not, you lose.
             var lose = confirm('You Lose!! Play again?');
             if (lose) {
                 location.reload();
@@ -90,10 +92,31 @@ $(document).ready(function () {
         //if you get the right amount of clicks, and they all match...
         if (counter === round.length) {
             console.log('you got to the end!')
-                //reset the counter to 0
+                //...reset the counter to 0...
             counter = 0;
-            //and give the turn back to the CPU
+            //...and give the turn back to the CPU!
             generatePath();
+            //what's a game without a scoreboard??
+            score++;
+            $('.score').text('Score: ' + score)
         } //end of if-statement
+    }); //end of click listener
+    //###########################################
+    //end game logic
+    //###########################################
+    //###########################################
+    //make flash
+    //###########################################
+    //###########################################
+    //end make flash
+    //###########################################
+    //###########################################
+    //reload button
+    //###########################################
+    $('button').click(function () {
+        location.reload()
     });
+    //###########################################
+    //end reload button
+    //###########################################
 }); //end of jQuery stuff. Don't touch this bracket or else!!!!
