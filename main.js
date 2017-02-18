@@ -8,7 +8,6 @@ $(document).ready(function () {
     var $square = $('.gamepiece');
     var $timer = $('.timer');
     var timeRemaining = 21;
-    var timePassed = 0;
     var $button = $('button');
     var score = 0;
     //###########################################
@@ -21,15 +20,16 @@ $(document).ready(function () {
     var time = setInterval(function () {
         timeRemaining--;
         $timer.text($('#your-name').value + "'s Time: " + timeRemaining);
-        timePassed++;
-        if (timePassed === 10) {
+        if (timeRemaining === 0) {
+            var lost = confirm('Time is up! Play again?')
             clearInterval(time);
+            if (lost) {
+                location.reload();
+            }
         } //if statement that stops the counter at 0
     }, 1000); //end of setInterval
     //This timer function definitely works!
-    //    setTimeout(function () {
-    //        alert("Time's Up!")
-    //    }, 20000); //actually pops up an alert that says time's up
+    //actually pops up an alert that says time's up
     //###########################################
     //end timer
     //###########################################
@@ -111,7 +111,9 @@ $(document).ready(function () {
             //...and give the turn back to the CPU!
             generatePath();
             setPattern();
-            //what's a game without a scoreboard??
+            //and gives you an extra 2 seconds every round
+            timeRemaining += 2
+                //what's a game without a scoreboard??
             score++;
             $('.score').text('Score: ' + score)
         } //end of if-statement
