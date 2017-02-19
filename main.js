@@ -55,7 +55,7 @@ $(document).ready(function () {
     //CPU will generate a random square at the end of your turn
     var generatePath = function () {
         //pick a random square...
-        var singularSquare = $square[Math.floor(Math.random() * $square.length)];
+        var singularSquare = $square[Math.floor(Math.random() * 4)];
         //...and push it into the array.
         round.push(singularSquare.id);
         console.log(round);
@@ -117,17 +117,44 @@ $(document).ready(function () {
             //...and give the turn back to the CPU!
             generatePath();
             setPattern();
-            //..and gives you an extra 2 seconds every round
+            //..and gives you an extra 4 seconds every round
             timeRemaining += 4
                 //what's a game without a scoreboard??
             score++;
             $('.score').text('Score: ' + score);
         } //end of if-statement
-        if (score != 0 && score % 5 === 0) {
-            var newPiece = $('<div class=gamepiece>');
-            console.log(newPiece)
-            $div.append(newPiece);
-        }
+        if (score === 10) {
+            $square.each(function (i, anything) {
+                //When the player gets through 5 rounds...
+                var red = Math.floor(Math.random() * 255);
+                var green = Math.floor(Math.random() * 255);
+                var blue = Math.floor(Math.random() * 255);
+                //...the squares suddenly change color again!
+                $(anything).css('background-color', 'rgb(' + red + ',' + green + ',' + blue + ')');
+            });
+        }; //end of distraction level 1
+        if (score === 5) {
+            //when the player gets through 10 rounds...
+            var distraction2 = setInterval(function () {
+                //the gamepieces will start to shake!
+                $square.effect('shake', {
+                    times: 3
+                });
+            }, 750)
+        } //end of distraction level 2
+        if (score === 15) {
+            //when the player gets through 15 rounds...
+            var red = Math.floor(Math.random() * 255);
+            var green = Math.floor(Math.random() * 255);
+            var blue = Math.floor(Math.random() * 255);
+            //...this game turns into a disco party...
+            var distraction = setInterval(function () {
+                //...and the background flashes as a distraction!!
+                $('body').css('background-color', 'rgb(' + red + ',' + green + ',' + blue + ')')
+            }, 500);
+            //Originally, the lights flashed a LOT faster.
+            //But I got worried that someone playing my game may have a condition
+        }; //end of distraction level 3
     }); //end of click listener
     //###########################################
     //end game logic
