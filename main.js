@@ -1,6 +1,6 @@
-//alert('Woo, javascript is connected!')
-//Thanks, Gersh and Taka.
+//Thanks, Taka, Gersh, w3schools, stackoverflow, api.jquery, and coffee.
 $(document).ready(function () {
+    console.log('Woo, javascript is connected!');
     //###########################################
     //variables
     //###########################################
@@ -13,23 +13,23 @@ $(document).ready(function () {
     //###########################################
     //end variables
     //###########################################
+    //takes the user input from the front page...
+    var name = window.location.href.split('=')[1];
     //###########################################
     //timer
     //###########################################
-    //appending a timer generates a countdown, which is what i want!
     var time = setInterval(function () {
+        //...and appends it to the timer
         timeRemaining--;
-        $timer.text($('#your-name').value + "'s Time: " + timeRemaining);
+        $timer.text(name + "'s Time: " + timeRemaining);
         if (timeRemaining === 0) {
-            var lost = confirm('Time is up! Play again?')
             clearInterval(time);
-            if (lost) {
-                location.reload();
-            }
-        } //if statement that stops the counter at 0
+            //            var lost = confirm('Time is up! Play again?')
+            //            if (lost) {
+            //                location.reload();
+            //            }
+        } //if statement that stops the counter at 0 and forces a loss
     }, 1000); //end of setInterval
-    //This timer function definitely works!
-    //actually pops up an alert that says time's up
     //###########################################
     //end timer
     //###########################################
@@ -37,9 +37,11 @@ $(document).ready(function () {
     //generate colors
     //###########################################
     $square.each(function (i, anything) {
+        //personal flair: Not only will the sequence be different every time...
         var red = Math.floor(Math.random() * 255);
         var green = Math.floor(Math.random() * 255);
         var blue = Math.floor(Math.random() * 255);
+        //...but the squares will be different every time as well!
         $(anything).css('background-color', 'rgb(' + red + ',' + green + ',' + blue + ')');
     });
     //###########################################
@@ -53,7 +55,7 @@ $(document).ready(function () {
     //CPU will generate a random square at the end of your turn
     var generatePath = function () {
         //pick a random square...
-        var singularSquare = $square[Math.floor(Math.random() * 4)];
+        var singularSquare = $square[Math.floor(Math.random() * $square.length)];
         //...and push it into the array.
         round.push(singularSquare.id);
         console.log(round);
@@ -74,6 +76,10 @@ $(document).ready(function () {
             }, (i * 500)); //end of setTimeout
         }); //end of .each() method
     }; //end of setPattern();
+    //NB: The selector looks for a '#' because the /round/ array is full of IDs (read: numbers), not actual square identifiers.
+    //figured this out when it wouldn't flash if all I had in here was round[i] in the for-loop version of this iteration
+    //I have coffee-fueled 11pm Friday night desperation to thank for this realization. 
+    //The same desperation that led me to trying literally every permutation and combination of selector to make these damn squares flash.
     //again, call it to start the game.
     setPattern();
     //###########################################
@@ -100,7 +106,7 @@ $(document).ready(function () {
             if (lose) {
                 location.reload();
             };
-        }; //end of game over check
+        }; //end of checking if you're wrong
         console.log(playerClicks);
         console.log(round);
         //if you get the right amount of clicks, and they all match...
@@ -111,12 +117,17 @@ $(document).ready(function () {
             //...and give the turn back to the CPU!
             generatePath();
             setPattern();
-            //and gives you an extra 2 seconds every round
-            timeRemaining += 2
+            //..and gives you an extra 2 seconds every round
+            timeRemaining += 4
                 //what's a game without a scoreboard??
             score++;
-            $('.score').text('Score: ' + score)
+            $('.score').text('Score: ' + score);
         } //end of if-statement
+        if (score != 0 && score % 5 === 0) {
+            var newPiece = $('<div class=gamepiece>');
+            console.log(newPiece)
+            $div.append(newPiece);
+        }
     }); //end of click listener
     //###########################################
     //end game logic
