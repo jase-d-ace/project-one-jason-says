@@ -18,18 +18,18 @@ $(document).ready(function () {
     //###########################################
     //timer
     //###########################################
-    var time = setInterval(function () {
-        //...and appends it to the timer
-        timeRemaining--;
-        $timer.text(name + "'s Time Left: " + timeRemaining);
-        if (timeRemaining === 0) {
-            clearInterval(time);
-            var lost = confirm('Time is up! Play again?');
-            if (lost) {
-                location.reload();
-            };
-        }; //if statement that stops the counter at 0 and forces a loss
-    }, 1000); //end of setInterval
+    //    var time = setInterval(function () {
+    //        //...and appends it to the timer
+    //        timeRemaining--;
+    //        $timer.text(name + "'s Time Left: " + timeRemaining);
+    //        if (timeRemaining === 0) {
+    //            clearInterval(time);
+    //            var lost = confirm('Time is up! Play again?');
+    //            if (lost) {
+    //                location.reload();
+    //            };
+    //        }; //if statement that stops the counter at 0 and forces a loss
+    //    }, 1000); //end of setInterval
     //###########################################
     //end timer
     //###########################################
@@ -102,10 +102,10 @@ $(document).ready(function () {
         } //end of checking if you're right
         else {
             //...if not, you lose.
-            var lose = confirm('You Lose!! Play again?');
-            if (lose) {
-                location.reload();
-            };
+                        var lose = confirm('You Lose!! Play again?');
+                    if (lose) {
+                        location.reload();
+                    };
         }; //end of checking if you're wrong
         console.log(playerClicks);
         console.log(round);
@@ -125,9 +125,6 @@ $(document).ready(function () {
         } //end of if-statement
         if (score === 3) {
             console.log('level one')
-            var popup = $('<h2>')
-            popup.text('Whoa, what was that?!')
-            $('body').append(popup);
             $square.each(function (i, anything) {
                 //When the player gets through 3 rounds...
                 var red = Math.floor(Math.random() * 255);
