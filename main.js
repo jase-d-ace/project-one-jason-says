@@ -21,14 +21,14 @@ $(document).ready(function () {
     var time = setInterval(function () {
         //...and appends it to the timer
         timeRemaining--;
-        $timer.text(name + "'s Time: " + timeRemaining);
+        $timer.text(name + "'s Time Left: " + timeRemaining);
         if (timeRemaining === 0) {
             clearInterval(time);
-            //            var lost = confirm('Time is up! Play again?')
-            //            if (lost) {
-            //                location.reload();
-            //            }
-        } //if statement that stops the counter at 0 and forces a loss
+            var lost = confirm('Time is up! Play again?');
+            if (lost) {
+                location.reload();
+            };
+        }; //if statement that stops the counter at 0 and forces a loss
     }, 1000); //end of setInterval
     //###########################################
     //end timer
@@ -123,9 +123,13 @@ $(document).ready(function () {
             score++;
             $('.score').text('Score: ' + score);
         } //end of if-statement
-        if (score === 10) {
+        if (score === 3) {
+            console.log('level one')
+            var popup = $('<h2>')
+            popup.text('Whoa, what was that?!')
+            $('body').append(popup);
             $square.each(function (i, anything) {
-                //When the player gets through 5 rounds...
+                //When the player gets through 3 rounds...
                 var red = Math.floor(Math.random() * 255);
                 var green = Math.floor(Math.random() * 255);
                 var blue = Math.floor(Math.random() * 255);
@@ -133,17 +137,15 @@ $(document).ready(function () {
                 $(anything).css('background-color', 'rgb(' + red + ',' + green + ',' + blue + ')');
             });
         }; //end of distraction level 1
-        if (score === 5) {
-            //when the player gets through 10 rounds...
-            var distraction2 = setInterval(function () {
-                //the gamepieces will start to shake!
-                $square.effect('shake', {
-                    times: 3
-                });
-            }, 750)
+        if (score === 4) {
+            var singularSquare = $square[Math.floor(Math.random() * 4)];
+            $(singularSquare).animate({
+                left: 25 + 'vw'
+            }, 200)
         } //end of distraction level 2
-        if (score === 15) {
-            //when the player gets through 15 rounds...
+        if (score === 10) {
+            console.log('level three')
+                //when the player gets through 10 rounds...
             var red = Math.floor(Math.random() * 255);
             var green = Math.floor(Math.random() * 255);
             var blue = Math.floor(Math.random() * 255);
@@ -151,7 +153,7 @@ $(document).ready(function () {
             var distraction = setInterval(function () {
                 //...and the background flashes as a distraction!!
                 $('body').css('background-color', 'rgb(' + red + ',' + green + ',' + blue + ')')
-            }, 500);
+            }, 3000);
             //Originally, the lights flashed a LOT faster.
             //But I got worried that someone playing my game may have a condition
         }; //end of distraction level 3
