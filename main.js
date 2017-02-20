@@ -18,18 +18,18 @@ $(document).ready(function () {
     //###########################################
     //timer
     //###########################################
-    //    var time = setInterval(function () {
-    //        //...and appends it to the timer
-    //        timeRemaining--;
-    //        $timer.text(name + "'s Time Left: " + timeRemaining);
-    //        if (timeRemaining === 0) {
-    //            clearInterval(time);
-    //            var lost = confirm('Time is up! Play again?');
-    //            if (lost) {
-    //                location.reload();
-    //            };
-    //        }; //if statement that stops the counter at 0 and forces a loss
-    //    }, 1000); //end of setInterval
+    var time = setInterval(function () {
+        //...and appends it to the timer
+        timeRemaining--;
+        $timer.text(name + "'s Time Left: " + timeRemaining);
+        if (timeRemaining === 0) {
+            clearInterval(time);
+            var lost = confirm('Time is up! Play again?');
+            if (lost) {
+                location.reload();
+            };
+        }; //if statement that stops the counter at 0 and forces a loss
+    }, 1000); //end of setInterval
     //###########################################
     //end timer
     //###########################################
@@ -101,11 +101,12 @@ $(document).ready(function () {
             counter++;
         } //end of checking if you're right
         else {
-            //...if not, you lose.
-                        var lose = confirm('You Lose!! Play again?');
-                    if (lose) {
-                        location.reload();
-                    };
+            //...if not, you lose...
+            var lose = confirm('You Lose!! Play again?');
+            //...and you start over.
+            if (lose) {
+                location.reload();
+            };
         }; //end of checking if you're wrong
         console.log(playerClicks);
         console.log(round);
@@ -118,15 +119,31 @@ $(document).ready(function () {
             generatePath();
             setPattern();
             //..and gives you an extra 4 seconds every round
-            timeRemaining += 4
+            timeRemaining += 8
                 //what's a game without a scoreboard??
             score++;
             $('.score').text('Score: ' + score);
-        } //end of if-statement
-        if (score === 3) {
-            console.log('level one')
+        }; //end of turn check
+        //###########################################
+        //end game logic
+        //###########################################
+        //###########################################
+        //Difficulty Increasers
+        //###########################################
+        if (score === 4) {
+            console.log('level one');
+            //When the player gets through 4 rounds...
+            var singularSquare = $square[Math.floor(Math.random() * 4)];
+            $(singularSquare).animate({
+                //...the squares will move one at a time!
+                left: 25 + 'vw'
+                    //and now they're all slightly shifted left
+            }, 200)
+        } //end of distraction level 2
+        if (score === 7) {
+            console.log('level two')
             $square.each(function (i, anything) {
-                //When the player gets through 3 rounds...
+                //When the player gets through 7 rounds...
                 var red = Math.floor(Math.random() * 255);
                 var green = Math.floor(Math.random() * 255);
                 var blue = Math.floor(Math.random() * 255);
@@ -134,12 +151,6 @@ $(document).ready(function () {
                 $(anything).css('background-color', 'rgb(' + red + ',' + green + ',' + blue + ')');
             });
         }; //end of distraction level 1
-        if (score === 4) {
-            var singularSquare = $square[Math.floor(Math.random() * 4)];
-            $(singularSquare).animate({
-                left: 25 + 'vw'
-            }, 200)
-        } //end of distraction level 2
         if (score === 10) {
             console.log('level three')
                 //when the player gets through 10 rounds...
@@ -154,10 +165,10 @@ $(document).ready(function () {
             //Originally, the lights flashed a LOT faster.
             //But I got worried that someone playing my game may have a condition
         }; //end of distraction level 3
-    }); //end of click listener
-    //###########################################
-    //end game logic
-    //###########################################
+        //###########################################
+        //End Difficulty Increasers
+        //###########################################
+    }); //end of click listener (official end of logic)
     //###########################################
     //reload button
     //###########################################
