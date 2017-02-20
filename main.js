@@ -139,7 +139,7 @@ $(document).ready(function () {
                 left: 25 + 'vw'
                     //and now they're all slightly shifted left
             }, 200)
-        } //end of distraction level 2
+        } //end of distraction level 1
         if (score === 7) {
             console.log('level two')
             $square.each(function (i, anything) {
@@ -150,7 +150,7 @@ $(document).ready(function () {
                 //...the squares suddenly change color again!
                 $(anything).css('background-color', 'rgb(' + red + ',' + green + ',' + blue + ')');
             });
-        }; //end of distraction level 1
+        }; //end of distraction level 2
         if (score === 10) {
             console.log('level three')
                 //when the player gets through 10 rounds...
