@@ -2,6 +2,7 @@ jQuery(function () {
     //this little minigame lets you play a rudimentary Duck Hunt 
     //if you want.
     //This is also a shameless recycling of the Duck Hunt lab we worked on in class.
+    //That being said, most of this is Jackie's idea...
     var body = $('body');
     var box = $('<div>');
     box.text("Hehehe can't catch me!!")
