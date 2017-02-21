@@ -162,8 +162,9 @@ $(document).ready(function () {
                 //...and the background flashes as a distraction!!
                 $('body').css('background-color', 'rgb(' + red + ',' + green + ',' + blue + ')')
             }, 3000);
-            //Originally, the lights flashed a LOT faster.
-            //But I got worried that someone playing my game may have a condition
+            //Originally, the lights flashed a LOT faster...
+            //...but I got worried that someone playing my game may have epilepsy...
+            //...so now the lights flash very very slowly
         }; //end of distraction level 3
         //###########################################
         //End Difficulty Increasers
